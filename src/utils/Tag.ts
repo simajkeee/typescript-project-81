@@ -1,0 +1,54 @@
+const selfClosingTags = new Set([
+  'area',
+  'base',
+  'br',
+  'col',
+  'embed',
+  'hr',
+  'img',
+  'input',
+  'link',
+  'meta',
+  'param',
+  'source',
+  'track',
+  'wbr',
+]);
+
+export class Tag {
+  private tagName: string;
+  private attributes: {[key: string]: string};
+  private content: string;
+  private isSelfClosing: boolean;
+
+  constructor(
+    tagName: string,
+    attributes: {[key: string]: string} = {},
+    content = ''
+  ) {
+    this.tagName = tagName;
+    this.attributes = attributes;
+    this.content = content;
+    this.isSelfClosing = selfClosingTags.has(tagName.toLowerCase());
+  }
+
+  private generateAttributes(): string {
+    return Object.entries(this.attributes)
+      .map(([key, value]) => `${key}="${value}"`)
+      .join(' ');
+  }
+
+  toString(): string {
+    const attributes = this.generateAttributes();
+    let tag = `<${this.tagName}`;
+    if (attributes.trim().length > 0) {
+      tag += ` ${attributes.trim()}`;
+    }
+
+    if (this.isSelfClosing) {
+      return `${tag}/>`;
+    } else {
+      return `${tag}>${this.content}</${this.tagName}>`;
+    }
+  }
+}
