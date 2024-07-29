@@ -1,1 +1,1 @@
-export { Tag } from './utils/Tag.js';
+export {Tag} from './utils/Tag.js';
