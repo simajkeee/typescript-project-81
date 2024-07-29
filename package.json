@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Form generator",
   "main": "index.html",
-  "type": "module",
   "scripts": {
     "lint": "gts lint",
     "clean": "gts clean",
