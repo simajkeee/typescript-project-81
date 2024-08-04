@@ -10,7 +10,7 @@ lint:
 clean:
 	npm run clean
 
-fix:
+lint fix:
 	npm run fix
 
 dev:

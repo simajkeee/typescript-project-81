@@ -1,5 +1,4 @@
 import {Tag} from './../utils/Tag';
-import {expect} from "vitest";
 
 interface ToStringable {
   toString(): string;
@@ -44,10 +43,7 @@ describe('Tag', () => {
   });
 
   it('should handle empty attributes object', () => {
-    expectToBe(
-      new Tag('div', {}),
-      '<div></div>'
-    );
+    expectToBe(new Tag('div', {}), '<div></div>');
   });
 
   it('should correctly format with both attributes and content', () => {
