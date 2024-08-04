@@ -1,3 +1,5 @@
 import {Tag} from './utils/Tag';
 
-let t = new Tag('br');
+const t = new Tag('br');
+
+console.log(t.toString());

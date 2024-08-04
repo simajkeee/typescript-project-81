@@ -8,7 +8,9 @@ describe('Tag', () => {
 
   it('should create a tag with attribute', () => {
     const tag = new Tag('a', {href: 'http://tests.com', target: '_blank'});
-    expect(tag.toString()).toBe('<a href="http://tests.com" target="_blank"></a>');
+    expect(tag.toString()).toBe(
+      '<a href="http://tests.com" target="_blank"></a>'
+    );
   });
 
   it('should create a tag with content.', () => {
@@ -34,10 +36,16 @@ describe('Tag', () => {
   it('should handle empty attributes object', () => {
     const tag = new Tag('div', {});
     expect(tag.toString()).toBe('<div></div>');
-  })
+  });
 
   it('should correctly format with both attributes and content', () => {
-    const tag = new Tag('a', {href: 'http://tests.com', target: '_blank'}, 'Some content');
-    expect(tag.toString()).toBe('<a href="http://tests.com" target="_blank">Some content</a>');
+    const tag = new Tag(
+      'a',
+      {href: 'http://tests.com', target: '_blank'},
+      'Some content'
+    );
+    expect(tag.toString()).toBe(
+      '<a href="http://tests.com" target="_blank">Some content</a>'
+    );
   });
 });
