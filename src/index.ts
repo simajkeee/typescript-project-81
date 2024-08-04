@@ -1,1 +1,3 @@
-export {Tag} from './utils/Tag.js';
+import {Tag} from './utils/Tag';
+
+let t = new Tag('br');
