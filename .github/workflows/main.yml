@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-  build:
+  lint:
 
     runs-on: ubuntu-latest
 
@@ -21,3 +21,35 @@ jobs:
 
       - run: npm ci
       - run: make lint
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+      - name: Set up tools on Ubuntu
+        run: sudo apt-get update && sudo apt-get install -y build-essential
+
+      - run: npm ci
+      - run: make test
+
+  coverage:
+    needs: [ test ]
+    name: coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+      - run: npm ci
+      - uses: paambaati/codeclimate-action@v5
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: npm run vitest-coverage
+          debug: true
