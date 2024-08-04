@@ -53,3 +53,5 @@ jobs:
         with:
           coverageCommand: npm run vitest-coverage
           debug: true
+          coverageLocations: |
+            ${{github.workspace}}/coverage/clover.xml:clover
