@@ -1,41 +1,53 @@
 import {Tag} from './../utils/Tag';
+import {expect} from "vitest";
+
+interface ToStringable {
+  toString(): string;
+}
+
+function expectToBe(obj: ToStringable, expected: string): void {
+  expect(obj.toString()).toBe(expected);
+}
 
 describe('Tag', () => {
   it('should create a simple tag without attributes or content', () => {
-    const tag = new Tag('div');
-    expect(tag.toString()).toBe('<div></div>');
+    expectToBe(new Tag('div'), '<div></div>');
   });
 
   it('should create a tag with attribute', () => {
-    const tag = new Tag('a', {href: 'http://tests.com', target: '_blank'});
-    expect(tag.toString()).toBe(
+    expectToBe(
+      new Tag('a', {href: 'http://tests.com', target: '_blank'}),
       '<a href="http://tests.com" target="_blank"></a>'
     );
   });
 
   it('should create a tag with content.', () => {
-    const tag = new Tag('p', {}, 'Some content');
-    expect(tag.toString()).toBe('<p>Some content</p>');
+    expectToBe(new Tag('p', {}, 'Some content'), '<p>Some content</p>');
   });
 
   it('should create a self-closing tag without attributes.', () => {
-    const tag = new Tag('img');
-    expect(tag.toString()).toBe('<img/>');
+    expectToBe(new Tag('img'), '<img/>');
   });
 
   it('should create a self-closing tag with attributes.', () => {
-    const tag = new Tag('img', {src: 'image.jpg', alt: 'Image'});
-    expect(tag.toString()).toBe('<img src="image.jpg" alt="Image"/>');
+    expectToBe(
+      new Tag('img', {src: 'image.jpg', alt: 'Image'}),
+      '<img src="image.jpg" alt="Image"/>'
+    );
   });
 
   it('should handle multiple attributes correctly', () => {
-    const tag = new Tag('input', {text: 'text', value: 'Sample'});
-    expect(tag.toString()).toBe('<input text="text" value="Sample"/>');
+    expectToBe(
+      new Tag('input', {text: 'text', value: 'Sample'}),
+      '<input text="text" value="Sample"/>'
+    );
   });
 
   it('should handle empty attributes object', () => {
-    const tag = new Tag('div', {});
-    expect(tag.toString()).toBe('<div></div>');
+    expectToBe(
+      new Tag('div', {}),
+      '<div></div>'
+    );
   });
 
   it('should correctly format with both attributes and content', () => {
@@ -44,7 +56,9 @@ describe('Tag', () => {
       {href: 'http://tests.com', target: '_blank'},
       'Some content'
     );
-    expect(tag.toString()).toBe(
+
+    expectToBe(
+      tag,
       '<a href="http://tests.com" target="_blank">Some content</a>'
     );
   });
