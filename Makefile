@@ -18,3 +18,6 @@ dev:
 
 lite:
 	npm run lite
+
+test:
+	npm run vitest

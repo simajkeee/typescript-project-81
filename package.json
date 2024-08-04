@@ -8,8 +8,9 @@
     "clean": "gts clean",
     "compile": "tsc",
     "fix": "gts fix",
-    "dev": "tsc --watch & lite-server",
-    "lite": "npx lite-server"
+    "exec": "npx ts-node ./src/index.ts",
+    "vitest": "vitest --dir ./src/__tests__/",
+    "vitest-coverage": "npx vitest run --coverage"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,9 @@
   "homepage": "https://github.com/simajkeee/typescript-project-81#readme",
   "devDependencies": {
     "@types/node": "^20.12.7",
+    "@vitest/coverage-v8": "^2.0.5",
     "gts": "^5.3.1",
-    "lite-server": "^2.6.1"
+    "ts-node": "^10.9.2",
+    "vitest": "^2.0.5"
   }
 }
