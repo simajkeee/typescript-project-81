@@ -1,12 +1,5 @@
 import {Tag} from './../utils/Tag';
-
-interface ToStringable {
-  toString(): string;
-}
-
-function expectToBe(obj: ToStringable, expected: string): void {
-  expect(obj.toString()).toBe(expected);
-}
+import {expectToBe} from './utils/helpers';
 
 describe('Tag', () => {
   it('should create a simple tag without attributes or content', () => {
