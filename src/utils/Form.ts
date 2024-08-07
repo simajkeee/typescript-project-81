@@ -22,7 +22,7 @@ export default class Form {
   constructor(private fields: FormFields, private props: FormProps, private fieldsCallback: Function) {
   }
 
-  input(field: string, props: FieldProps = {}): string {
+  input(field: string, props: FieldProps = {}): void {
     if (this.fields[field] === undefined) {
       throw new Error(`Field ${field} does not exist in the template.`);
     }
@@ -42,12 +42,32 @@ export default class Form {
     }
 
     let content = '';
-    if (input === 'textarea' && fieldProps.value !== undefined) {
+    if (input !== this._defaultField) {
       content = fieldProps.value;
       delete fieldProps.value;
     }
 
-    this._fieldsMarkup += new Tag(input, fieldProps, content).toString();
+    this._fieldsMarkup += this.tagWithLabel(input, fieldProps, content);
+  }
+
+  submit(content: string = 'Save'): void {
+    this._fieldsMarkup += new Tag('input', {type: 'submit', value: content}).toString();
+  }
+
+  tagWithLabel(
+    tagName: string,
+    attributes: {[key: string]: string} = {},
+    content = ''
+  ): string {
+    let output = '';
+    if (attributes.name === undefined) {
+      throw new Error('can\'t find \'name\' attribute for a field');
+    }
+
+    output += `<label for="${attributes.name}">${attributes.name.charAt(0).toUpperCase() + attributes.name.slice(1)}</label>`;
+    output += new Tag(tagName, attributes, content).toString();
+
+    return output;
   }
 
   toString(): string {
