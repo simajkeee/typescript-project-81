@@ -1,3 +1,5 @@
+import {FieldProps} from '../types/FormTypes';
+
 const selfClosingTags = new Set([
   'area',
   'base',
@@ -17,15 +19,11 @@ const selfClosingTags = new Set([
 
 export class Tag {
   private tagName: string;
-  private attributes: {[key: string]: string};
+  private attributes: FieldProps;
   private content: string;
   private isSelfClosing: boolean;
 
-  constructor(
-    tagName: string,
-    attributes: {[key: string]: string} = {},
-    content = ''
-  ) {
+  constructor(tagName: string, attributes: FieldProps = {}, content = '') {
     this.tagName = tagName;
     this.attributes = attributes;
     this.content = content;

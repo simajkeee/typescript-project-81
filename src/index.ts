@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {Tag} from './utils/Tag';
 
 const t = new Tag('br');

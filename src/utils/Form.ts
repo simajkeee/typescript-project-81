@@ -1,26 +1,20 @@
 import {Tag} from './../utils/Tag';
-import ModelHelper from "../helpers/ModelHelper";
-
-type FormFields = {
-  [key: string]: string;
-}
-
-type FormProps = {
-  [key: string]: string;
-}
-
-type FieldProps = FormProps;
+import ModelHelper from '../helpers/ModelHelper';
+import {FormFields, FormProps, FieldProps} from '../types/FormTypes';
 
 export default class Form {
-  private _fieldsMarkup: string = '';
+  private _fieldsMarkup = '';
   private _defaultField = 'input';
 
   static formFor(fields: FormFields, props: FormProps, fn: Function): string {
-    return (new Form(fields, props, fn)).toString()
+    return new Form(fields, props, fn).toString();
   }
 
-  constructor(private fields: FormFields, private props: FormProps, private fieldsCallback: Function) {
-  }
+  constructor(
+    private fields: FormFields,
+    private props: FormProps,
+    private fieldsCallback: Function
+  ) {}
 
   input(field: string, props: FieldProps = {}): void {
     if (this.fields[field] === undefined) {
@@ -30,18 +24,18 @@ export default class Form {
     const input = props.as !== undefined ? props.as : this._defaultField;
     const defaultAttributes = ModelHelper.getModelDefaultAttributes(input);
 
-
-    let fieldProps = Object.assign(
-      {},
-      defaultAttributes,
-      { name: field, type: 'text', value: this.fields[field], ...props }
-    );
+    const fieldProps: FieldProps = Object.assign({}, defaultAttributes, {
+      name: field,
+      type: 'text',
+      value: this.fields[field],
+      ...props,
+    });
 
     if (input !== this._defaultField && fieldProps.type !== undefined) {
       delete fieldProps.type;
     }
 
-    let content = '';
+    let content: string | undefined = '';
     if (input !== this._defaultField) {
       content = fieldProps.value;
       delete fieldProps.value;
@@ -50,18 +44,21 @@ export default class Form {
     this._fieldsMarkup += this.tagWithLabel(input, fieldProps, content);
   }
 
-  submit(content: string = 'Save'): void {
-    this._fieldsMarkup += new Tag('input', {type: 'submit', value: content}).toString();
+  submit(content = 'Save'): void {
+    this._fieldsMarkup += new Tag('input', {
+      type: 'submit',
+      value: content,
+    }).toString();
   }
 
   tagWithLabel(
     tagName: string,
-    attributes: {[key: string]: string} = {},
+    attributes: FieldProps = {},
     content = ''
   ): string {
     let output = '';
     if (attributes.name === undefined) {
-      throw new Error('can\'t find \'name\' attribute for a field');
+      throw new Error("can't find 'name' attribute for a field");
     }
 
     output += `<label for="${attributes.name}">${attributes.name.charAt(0).toUpperCase() + attributes.name.slice(1)}</label>`;
@@ -71,15 +68,15 @@ export default class Form {
   }
 
   toString(): string {
-    this.fieldsCallback(this)
+    this.fieldsCallback(this);
 
     return `${this.openFormTag()}${this._fieldsMarkup}${this.closeFormTag()}`;
   }
 
   private openFormTag() {
-    let props = {action: this.props.action, method: this.props.method};
+    const props = {action: this.props.action, method: this.props.method};
     if (props.action === undefined) {
-      props.action = '#'
+      props.action = '#';
     }
 
     if (props.method === undefined) {

@@ -2,7 +2,17 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "Form generator",
-  "main": "index.html",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "lint": "gts lint",
     "clean": "gts clean",

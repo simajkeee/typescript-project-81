@@ -1,3 +1,4 @@
+import {describe, it} from 'vitest';
 import {Tag} from './../utils/Tag';
 import {expectToBe} from './utils/helpers';
 
