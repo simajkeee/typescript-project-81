@@ -1,4 +1,5 @@
-import Textarea from '../models/Textarea';
+import Textarea from '../models/Textarea.js';
+
 export default class ModelHelper {
   static getModelDefaultAttributes(model) {
     switch (model) {
@@ -9,4 +10,3 @@ export default class ModelHelper {
     }
   }
 }
-//# sourceMappingURL=ModelHelper.js.map

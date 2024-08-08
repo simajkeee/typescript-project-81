@@ -1,13 +1,14 @@
-import {Tag} from '../utils/Tag';
-import ModelHelper from '../helpers/ModelHelper';
-import {FormFields, FormProps, FieldProps} from '../types/FormTypes';
+/* eslint-disable no-param-reassign, class-methods-use-this, array-callback-return */
+import Tag from '../utils/Tag.js'
+import ModelHelper from '../helpers/ModelHelper.js'
+import { FormFields, FormProps, FieldProps } from '../types/FormTypes.js'
 
 export default class Form {
-  private _fieldsMarkup = '';
-  private _defaultField = 'input';
+  private fieldsMarkup = ''
+  private defaultField = 'input'
 
   static formFor(fields: FormFields, props: FormProps, fn: Function): string {
-    return new Form(fields, props, fn).toString();
+    return new Form(fields, props, fn).toString()
   }
 
   constructor(
@@ -18,41 +19,41 @@ export default class Form {
 
   input(field: string, props: FieldProps = {}): void {
     if (this.fields[field] === undefined) {
-      throw new Error(`Field ${field} does not exist in the template.`);
+      throw new Error(`Field ${field} does not exist in the template.`)
     }
 
-    const input = props.as !== undefined ? props.as : this._defaultField;
+    const input = props.as !== undefined ? props.as : this.defaultField
     if (props.as !== undefined) {
-      delete props.as; // no need to add such attribute
+      delete props.as
     }
 
-    const defaultAttributes = ModelHelper.getModelDefaultAttributes(input);
+    const defaultAttributes = ModelHelper.getModelDefaultAttributes(input)
 
     const fieldProps: FieldProps = Object.assign({}, defaultAttributes, {
       name: field,
       type: 'text',
       value: this.fields[field],
       ...props,
-    });
+    }) as FieldProps;
 
-    if (input !== this._defaultField && fieldProps.type !== undefined) {
-      delete fieldProps.type;
+    if (input !== this.defaultField && fieldProps.type !== undefined) {
+      delete fieldProps.type
     }
 
-    let content: string | undefined = '';
-    if (input !== this._defaultField) {
-      content = fieldProps.value;
-      delete fieldProps.value;
+    let content: string | undefined = ''
+    if (input !== this.defaultField) {
+      content = fieldProps.value
+      delete fieldProps.value
     }
 
-    this._fieldsMarkup += this.tagWithLabel(input, fieldProps, content);
+    this.fieldsMarkup += this.tagWithLabel(input, fieldProps, content)
   }
 
   submit(content = 'Save'): void {
-    this._fieldsMarkup += new Tag('input', {
+    this.fieldsMarkup += new Tag('input', {
       type: 'submit',
       value: content,
-    }).toString();
+    }).toString()
   }
 
   tagWithLabel(
@@ -60,47 +61,47 @@ export default class Form {
     attributes: FieldProps = {},
     content = ''
   ): string {
-    let output = '';
+    let output = ''
     if (attributes.name === undefined) {
-      throw new Error("can't find 'name' attribute for a field");
+      throw new Error("can't find 'name' attribute for a field")
     }
 
-    output += `<label for="${attributes.name}">${attributes.name.charAt(0).toUpperCase() + attributes.name.slice(1)}</label>`;
-    output += new Tag(tagName, attributes, content).toString();
+    output += `<label for="${attributes.name}">${attributes.name.charAt(0).toUpperCase() + attributes.name.slice(1)}</label>`
+    output += new Tag(tagName, attributes, content).toString()
 
-    return output;
+    return output
   }
 
   toString(): string {
-    this.fieldsCallback(this);
+    this.fieldsCallback(this)
 
-    return `${this.openFormTag()}${this._fieldsMarkup}${this.closeFormTag()}`;
+    return `${this.openFormTag()}${this.fieldsMarkup}${this.closeFormTag()}`
   }
 
   private openFormTag() {
-    const props = {method: this.props.method, action: this.props.action};
+    const props = { method: this.props.method, action: this.props.action }
     if (props.action === undefined) {
-      props.action = '#';
+      props.action = '#'
     }
 
     if (props.method === undefined) {
-      props.method = 'post';
+      props.method = 'post'
     }
-    this.props = props;
+    this.props = props
 
-    return `<form${this.getFormAttributesString()}>`;
+    return `<form${this.getFormAttributesString()}>`
   }
 
   private closeFormTag() {
-    return '</form>';
+    return '</form>'
   }
 
   private getFormAttributesString(): string {
-    let propsStr = '';
+    let propsStr = ''
     Object.entries(this.props).map(([attr, val]) => {
-      propsStr += ` ${attr}="${val}"`;
-    });
+      propsStr += ` ${attr}="${val}"`
+    })
 
-    return propsStr;
+    return propsStr
   }
 }

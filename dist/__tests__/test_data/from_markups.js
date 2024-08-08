@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 function inputsNameAndJob() {
   return '<form method="post" action="#"><label for="name">Name</label><input name="name" type="text" value="rob"><label for="job">Job</label><textarea cols="20" rows="40" name="job">hexlet</textarea></form>';
 }
@@ -17,11 +18,5 @@ function formWithLabelsAndDefaultTextSubmit() {
   return '<form method="post" action="#"><label for="name">Name</label><input name="name" type="text" value="rob"><label for="job">Job</label><textarea cols="20" rows="40" name="job">hexlet</textarea><input type="submit" value="Save"></form>';
 }
 export {
-  inputsNameAndJob,
-  twoInputsWhereOneWithClass,
-  inputAsTextarea,
-  textareaRewriteDefaults,
-  formWithLabelsAndCustomTextSubmit,
-  formWithLabelsAndDefaultTextSubmit
+  inputsNameAndJob, twoInputsWhereOneWithClass, inputAsTextarea, textareaRewriteDefaults, formWithLabelsAndCustomTextSubmit, formWithLabelsAndDefaultTextSubmit,
 };
-//# sourceMappingURL=from_markups.js.map

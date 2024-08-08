@@ -7,17 +7,8 @@ watch:
 lint:
 	npm run lint
 
-clean:
-	npm run clean
-
 lint fix:
-	npm run fix
-
-dev:
-	npm run dev
-
-lite:
-	npm run lite
+	npm run lint-fix
 
 test:
 	npm run vitest

@@ -12,24 +12,30 @@ const selfClosingTags = new Set([
   'param',
   'source',
   'track',
-  'wbr'
+  'wbr',
 ]);
-export class Tag {
+export default class Tag {
   tagName;
+
   attributes;
+
   content;
+
   isSelfClosing;
+
   constructor(tagName, attributes = {}, content = '') {
     this.tagName = tagName;
     this.attributes = attributes;
     this.content = content;
     this.isSelfClosing = selfClosingTags.has(tagName.toLowerCase());
   }
+
   generateAttributes() {
     return Object.entries(this.attributes)
       .map(([key, value]) => `${key}="${value}"`)
       .join(' ');
   }
+
   toString() {
     const attributes = this.generateAttributes();
     let tag = `<${this.tagName}`;
@@ -38,9 +44,8 @@ export class Tag {
     }
     if (this.isSelfClosing) {
       return `${tag}>`;
-    } else {
-      return `${tag}>${this.content}</${this.tagName}>`;
     }
+
+    return `${tag}>${this.content}</${this.tagName}>`;
   }
 }
-//# sourceMappingURL=Tag.js.map
