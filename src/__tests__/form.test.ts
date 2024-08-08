@@ -1,5 +1,5 @@
 import {describe, beforeEach, it, expect} from 'vitest';
-import Form from './../utils/Form';
+import Form from '../utils/Form';
 import {expectToBe} from './utils/helpers';
 import {
   inputsNameAndJob,
@@ -30,7 +30,7 @@ describe('Form', () => {
   it('it should create a simple form', () => {
     expectToBe(
       Form.formFor(template, {}, () => {}),
-      '<form action="#" method="post"></form>'
+      '<form method="post" action="#"></form>'
     );
   });
 

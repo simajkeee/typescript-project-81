@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-import {Tag} from './utils/Tag';
+import HexletCode from './facades/HexletCode';
 
-const t = new Tag('br');
-
-console.log(t.toString());
+export default HexletCode;

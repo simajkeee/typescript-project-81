@@ -1,5 +1,5 @@
 import {describe, it} from 'vitest';
-import {Tag} from './../utils/Tag';
+import {Tag} from '../utils/Tag';
 import {expectToBe} from './utils/helpers';
 
 describe('Tag', () => {
@@ -19,20 +19,20 @@ describe('Tag', () => {
   });
 
   it('should create a self-closing tag without attributes.', () => {
-    expectToBe(new Tag('img'), '<img/>');
+    expectToBe(new Tag('img'), '<img>');
   });
 
   it('should create a self-closing tag with attributes.', () => {
     expectToBe(
       new Tag('img', {src: 'image.jpg', alt: 'Image'}),
-      '<img src="image.jpg" alt="Image"/>'
+      '<img src="image.jpg" alt="Image">'
     );
   });
 
   it('should handle multiple attributes correctly', () => {
     expectToBe(
       new Tag('input', {text: 'text', value: 'Sample'}),
-      '<input text="text" value="Sample"/>'
+      '<input text="text" value="Sample">'
     );
   });
 

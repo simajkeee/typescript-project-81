@@ -1,5 +1,5 @@
 compile:
-	npx tsc
+	npm run build
 
 watch:
 	npx tsc --watch

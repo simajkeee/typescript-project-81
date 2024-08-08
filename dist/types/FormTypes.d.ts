@@ -6,6 +6,7 @@ type FormProps = {
 };
 type FieldProps = {
     [key: string]: string | undefined;
+    as?: string;
     type?: string;
     value?: string;
 };

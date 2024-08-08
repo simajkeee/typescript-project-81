@@ -1,4 +1,4 @@
-import {Tag} from './../utils/Tag';
+import {Tag} from '../utils/Tag';
 import ModelHelper from '../helpers/ModelHelper';
 import {FormFields, FormProps, FieldProps} from '../types/FormTypes';
 
@@ -22,6 +22,10 @@ export default class Form {
     }
 
     const input = props.as !== undefined ? props.as : this._defaultField;
+    if (props.as !== undefined) {
+      delete props.as; // no need to add such attribute
+    }
+
     const defaultAttributes = ModelHelper.getModelDefaultAttributes(input);
 
     const fieldProps: FieldProps = Object.assign({}, defaultAttributes, {
@@ -74,7 +78,7 @@ export default class Form {
   }
 
   private openFormTag() {
-    const props = {action: this.props.action, method: this.props.method};
+    const props = {method: this.props.method, action: this.props.action};
     if (props.action === undefined) {
       props.action = '#';
     }

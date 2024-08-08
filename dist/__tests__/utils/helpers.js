@@ -1,8 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.expectToBe = expectToBe;
-const vitest_1 = require("vitest");
+import { expect } from 'vitest';
 function expectToBe(obj, expected) {
-    (0, vitest_1.expect)(obj.toString()).toBe(expected);
+  expect(obj.toString()).toBe(expected);
 }
+export { expectToBe };
 //# sourceMappingURL=helpers.js.map

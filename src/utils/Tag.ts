@@ -44,7 +44,7 @@ export class Tag {
     }
 
     if (this.isSelfClosing) {
-      return `${tag}/>`;
+      return `${tag}>`;
     } else {
       return `${tag}>${this.content}</${this.tagName}>`;
     }
