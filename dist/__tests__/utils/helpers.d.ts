@@ -1,5 +1,5 @@
 interface ToStringable {
-    toString(): string;
+  toString(): string
 }
-declare function expectToBe(obj: ToStringable, expected: string): void;
-export { expectToBe };
+declare function expectToBe(obj: ToStringable, expected: string): void
+export { expectToBe }

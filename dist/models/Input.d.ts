@@ -1,6 +1,6 @@
-import TagModelInterface from './TagModelInterface';
+import TagModelInterface from './TagModelInterface'
 export default class Input implements TagModelInterface {
-    defaultProps: {
-        type: string;
-    };
+  defaultProps: {
+    type: string
+  }
 }

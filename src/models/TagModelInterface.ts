@@ -1,3 +1,3 @@
 export default interface TagModelInterface {
-  defaultProps: {[key: string]: string};
+  defaultProps: { [key: string]: string }
 }

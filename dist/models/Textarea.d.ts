@@ -1,7 +1,7 @@
-import TagModelInterface from './TagModelInterface';
+import TagModelInterface from './TagModelInterface'
 export default class Textarea implements TagModelInterface {
-    defaultProps: {
-        cols: string;
-        rows: string;
-    };
+  defaultProps: {
+    cols: string
+    rows: string
+  }
 }

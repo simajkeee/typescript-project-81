@@ -1,16 +1,16 @@
 type FormFields = {
-  [key: string]: string;
-};
+  [key: string]: string
+}
 
 type FormProps = {
-  [key: string]: string;
-};
+  [key: string]: string
+}
 
 type FieldProps = {
-  [key: string]: string | undefined;
-  as?: string;
-  type?: string;
-  value?: string;
-};
+  [key: string]: string | undefined
+  as?: string
+  type?: string
+  value?: string
+}
 
-export {FormFields, FormProps, FieldProps};
+export { FormFields, FormProps, FieldProps }

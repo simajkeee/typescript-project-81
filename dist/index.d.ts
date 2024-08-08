@@ -1,2 +1,2 @@
-import HexletCode from './facades/HexletCode';
-export default HexletCode;
+import HexletCode from './facades/HexletCode'
+export default HexletCode
